@@ -1,5 +1,4 @@
-import '../styles/globals.css'
-import { useEffect } from 'react'
+// pages/_app.js
 import Head from 'next/head'
 
 function MyApp({ Component, pageProps }) {
