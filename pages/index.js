@@ -1,8 +1,7 @@
 // pages/index.js
 import { useState } from "react";
 import Head from "next/head";
-import Image from "next/image";
-import { FaLink, FaChartBar, FaBolt } from 'react-icons/fa';
+import Link from "next/link";
 
 export default function Home() {
   const [url, setUrl] = useState("");
@@ -47,68 +46,266 @@ export default function Home() {
     alert("Copied to clipboard!");
   };
 
+  // Inline styles as a fallback for Tailwind
+  const styles = {
+    container: {
+      minHeight: "100vh",
+      backgroundColor: "#121212",
+      color: "#F5F5F5",
+    },
+    header: {
+      padding: "1rem",
+    },
+    headerContainer: {
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "center",
+      maxWidth: "1200px",
+      margin: "0 auto",
+      padding: "0 1rem",
+    },
+    logo: {
+      display: "flex",
+      alignItems: "center",
+    },
+    logoSymbol: {
+      color: "#7D3C98",
+      fontSize: "1.875rem",
+      marginRight: "0.5rem",
+    },
+    logoText: {
+      color: "white",
+      fontSize: "1.5rem",
+      fontWeight: "bold",
+    },
+    nav: {
+      display: "flex",
+    },
+    navItem: {
+      marginLeft: "1.5rem",
+      cursor: "pointer",
+      transition: "color 0.2s",
+    },
+    main: {
+      maxWidth: "1200px",
+      margin: "0 auto",
+      padding: "0 1rem",
+    },
+    hero: {
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      justifyContent: "center",
+      padding: "5rem 0",
+      textAlign: "center",
+    },
+    heading: {
+      fontSize: "3rem",
+      fontWeight: "bold",
+      marginBottom: "1.5rem",
+    },
+    subheading: {
+      fontSize: "1.25rem",
+      marginBottom: "3rem",
+      maxWidth: "36rem",
+    },
+    highlight: {
+      color: "#7D3C98",
+    },
+    form: {
+      display: "flex",
+      flexDirection: "column",
+      width: "100%",
+      maxWidth: "36rem",
+      marginBottom: "2rem",
+    },
+    inputContainer: {
+      display: "flex",
+      flexDirection: "column",
+      marginBottom: "0.5rem",
+    },
+    input: {
+      padding: "1rem",
+      borderRadius: "0.75rem",
+      backgroundColor: "#1E1E50",
+      border: "1px solid #7D3C98",
+      color: "white",
+      marginBottom: "1rem",
+      width: "100%",
+    },
+    button: {
+      backgroundColor: "#7D3C98",
+      color: "white",
+      fontWeight: "bold",
+      padding: "1rem 2rem",
+      borderRadius: "0.75rem",
+      border: "none",
+      cursor: "pointer",
+      transition: "background-color 0.2s",
+    },
+    buttonHover: {
+      backgroundColor: "#6A0DAD",
+    },
+    errorMessage: {
+      color: "#ff4444",
+      marginBottom: "1rem",
+    },
+    resultContainer: {
+      backgroundColor: "#1E1E50",
+      padding: "1.5rem",
+      borderRadius: "0.75rem",
+      marginBottom: "3rem",
+      width: "100%",
+      maxWidth: "36rem",
+    },
+    resultLabel: {
+      marginBottom: "0.5rem",
+      color: "#00D4FF",
+      fontWeight: "500",
+    },
+    resultDisplay: {
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "stretch",
+      gap: "1rem",
+    },
+    resultInput: {
+      flexGrow: "1",
+      padding: "0.75rem",
+      borderRadius: "0.5rem",
+      backgroundColor: "#121212",
+      border: "1px solid #7D3C98",
+      color: "white",
+    },
+    copyButton: {
+      backgroundColor: "#32CD32",
+      color: "white",
+      fontWeight: "bold",
+      padding: "0.75rem 1.5rem",
+      borderRadius: "0.5rem",
+      border: "none",
+      cursor: "pointer",
+      transition: "background-color 0.2s",
+    },
+    features: {
+      display: "grid",
+      gridTemplateColumns: "repeat(1, 1fr)",
+      gap: "2rem",
+      marginBottom: "5rem",
+    },
+    featureCard: {
+      backgroundColor: "rgba(30, 30, 80, 0.3)",
+      padding: "2rem",
+      borderRadius: "0.75rem",
+      textAlign: "center",
+    },
+    featureIcon: {
+      backgroundColor: "#1E1E50",
+      display: "inline-block",
+      padding: "1rem",
+      borderRadius: "0.75rem",
+      marginBottom: "1rem",
+    },
+    featureTitle: {
+      fontSize: "1.5rem",
+      fontWeight: "bold",
+      marginBottom: "0.75rem",
+    },
+    footer: {
+      backgroundColor: "#1E1E50",
+      padding: "2rem 0",
+    },
+    footerContainer: {
+      maxWidth: "1200px",
+      margin: "0 auto",
+      padding: "0 1rem",
+      textAlign: "center",
+    },
+  };
+
+  // Media query for larger screens
+  const isDesktop = typeof window !== 'undefined' && window.innerWidth >= 768;
+
+  if (isDesktop) {
+    styles.features.gridTemplateColumns = "repeat(3, 1fr)";
+    styles.form.flexDirection = "row";
+    styles.form.gap = "1rem";
+    styles.inputContainer.flexGrow = "1";
+    styles.input.marginBottom = "0";
+    styles.resultDisplay.flexDirection = "row";
+  }
+
   return (
-    <div className="min-h-screen bg-[#121212] text-[#F5F5F5]">
+    <div style={styles.container}>
       <Head>
         <title>Cliply - Shorten URLs Instantly</title>
         <meta name="description" content="Fast, branded, and trackable links" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <header className="container mx-auto p-4 flex justify-between items-center">
-        <div className="flex items-center">
-          <span className="text-[#7D3C98] text-4xl mr-2">@</span>
-          <span className="text-white text-3xl font-bold">Cliply</span>
+      <header style={styles.header}>
+        <div style={styles.headerContainer}>
+          <div style={styles.logo}>
+            <span style={styles.logoSymbol}>@</span>
+            <span style={styles.logoText}>Cliply</span>
+          </div>
+          <nav style={styles.nav}>
+            <Link href="/signup" passHref>
+              <div style={styles.navItem}>Sign up</div>
+            </Link>
+            <Link href="/login" passHref>
+              <div style={styles.navItem}>Log in</div>
+            </Link>
+          </nav>
         </div>
-        <nav>
-          <ul className="flex space-x-6">
-            <li><a href="#" className="hover:text-[#7D3C98]">Sign up</a></li>
-            <li><a href="#" className="hover:text-[#7D3C98]">Log in</a></li>
-          </ul>
-        </nav>
       </header>
 
-      <main className="container mx-auto px-4">
-        <section className="flex flex-col items-center justify-center py-20 text-center">
-          <h1 className="text-5xl md:text-7xl font-bold mb-6">
-            Shorten URLs with <span className="text-[#7D3C98]">Cliply</span>
+      <main style={styles.main}>
+        <section style={styles.hero}>
+          <h1 style={styles.heading}>
+            Shorten URLs with <span style={styles.highlight}>Cliply</span>
           </h1>
-          <p className="text-xl mb-12 max-w-2xl">
+          <p style={styles.subheading}>
             Simplify your links, track analytics, and optimize sharing.
           </p>
 
-          <form onSubmit={shortenUrl} className="w-full max-w-4xl flex flex-col md:flex-row gap-4 mb-8">
-            <input
-              type="text"
-              value={url}
-              onChange={(e) => setUrl(e.target.value)}
-              placeholder="Enter a long URL"
-              className="flex-grow p-4 rounded-xl bg-[#1E1E50] border border-[#7D3C98] focus:outline-none focus:ring-2 focus:ring-[#00D4FF] text-white"
-            />
+          <form onSubmit={shortenUrl} style={styles.form}>
+            <div style={styles.inputContainer}>
+              <input
+                type="text"
+                value={url}
+                onChange={(e) => setUrl(e.target.value)}
+                placeholder="Enter a long URL"
+                style={styles.input}
+              />
+            </div>
             <button
               type="submit"
               disabled={isLoading}
-              className="bg-[#7D3C98] hover:bg-[#6A0DAD] text-white font-bold py-4 px-8 rounded-xl transition-colors"
+              style={{
+                ...styles.button,
+                ...(isLoading ? {} : styles.buttonHover),
+              }}
             >
               {isLoading ? "Shortening..." : "Shorten"}
             </button>
           </form>
 
-          {error && <p className="text-red-500 mb-4">{error}</p>}
+          {error && <p style={styles.errorMessage}>{error}</p>}
 
           {shortUrl && (
-            <div className="bg-[#1E1E50] p-6 rounded-xl mb-12 w-full max-w-4xl">
-              <p className="mb-2 text-[#00D4FF] font-medium">Your shortened URL:</p>
-              <div className="flex flex-col md:flex-row items-center gap-4">
+            <div style={styles.resultContainer}>
+              <p style={styles.resultLabel}>Your shortened URL:</p>
+              <div style={styles.resultDisplay}>
                 <input
                   type="text"
                   value={shortUrl}
                   readOnly
-                  className="flex-grow p-3 rounded-lg bg-[#121212] border border-[#7D3C98] text-white"
+                  style={styles.resultInput}
                 />
                 <button
                   onClick={copyToClipboard}
-                  className="bg-[#32CD32] hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg transition-colors"
+                  style={styles.copyButton}
                 >
                   Copy
                 </button>
@@ -117,35 +314,35 @@ export default function Home() {
           )}
         </section>
 
-        <section className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
-          <div className="bg-[#1E1E50]/30 p-8 rounded-xl text-center">
-            <div className="bg-[#1E1E50] inline-block p-4 rounded-xl mb-4">
-              <FaLink className="text-[#7D3C98] text-4xl" />
+        <section style={styles.features}>
+          <div style={styles.featureCard}>
+            <div style={styles.featureIcon}>
+              <span style={{ color: "#7D3C98", fontSize: "1.5rem" }}>🔗</span>
             </div>
-            <h2 className="text-2xl font-bold mb-3">Branded Links</h2>
+            <h2 style={styles.featureTitle}>Branded Links</h2>
             <p>Create custom short links with your own domain.</p>
           </div>
 
-          <div className="bg-[#1E1E50]/30 p-8 rounded-xl text-center">
-            <div className="bg-[#1E1E50] inline-block p-4 rounded-xl mb-4">
-              <FaChartBar className="text-[#00D4FF] text-4xl" />
+          <div style={styles.featureCard}>
+            <div style={styles.featureIcon}>
+              <span style={{ color: "#00D4FF", fontSize: "1.5rem" }}>📊</span>
             </div>
-            <h2 className="text-2xl font-bold mb-3">Analytics</h2>
+            <h2 style={styles.featureTitle}>Analytics</h2>
             <p>Gain insights with detailed click tracking.</p>
           </div>
 
-          <div className="bg-[#1E1E50]/30 p-8 rounded-xl text-center">
-            <div className="bg-[#1E1E50] inline-block p-4 rounded-xl mb-4">
-              <FaBolt className="text-[#00D4FF] text-4xl" />
+          <div style={styles.featureCard}>
+            <div style={styles.featureIcon}>
+              <span style={{ color: "#00D4FF", fontSize: "1.5rem" }}>⚡</span>
             </div>
-            <h2 className="text-2xl font-bold mb-3">Fast Redirection</h2>
+            <h2 style={styles.featureTitle}>Fast Redirection</h2>
             <p>Direct users to their destinations instantly.</p>
           </div>
         </section>
       </main>
 
-      <footer className="bg-[#1E1E50] py-8">
-        <div className="container mx-auto px-4 text-center">
+      <footer style={styles.footer}>
+        <div style={styles.footerContainer}>
           <p>© 2025 Cliply. All rights reserved.</p>
         </div>
       </footer>

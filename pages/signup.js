@@ -1,16 +1,25 @@
-// pages/login.js
+// pages/signup.js
 import Head from "next/head";
 import Link from "next/link";
 import { useState } from "react";
 
-export default function Login() {
+export default function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // This is a placeholder - login functionality would connect to Supabase
-    alert("Login functionality coming soon!");
+    
+    // Simple validation
+    if (password !== confirmPassword) {
+      setError("Passwords do not match");
+      return;
+    }
+    
+    // This is a placeholder - signup functionality would connect to Supabase
+    alert("Signup functionality coming soon!");
   };
 
   // Inline styles
@@ -118,13 +127,18 @@ export default function Login() {
       color: "#00D4FF",
       cursor: "pointer",
     },
+    errorMessage: {
+      color: "#ff4444",
+      marginBottom: "1rem",
+      textAlign: "center",
+    },
   };
 
   return (
     <div style={styles.container}>
       <Head>
-        <title>Cliply - Log In</title>
-        <meta name="description" content="Log in to your Cliply account" />
+        <title>Cliply - Sign Up</title>
+        <meta name="description" content="Create a Cliply account" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
@@ -141,7 +155,9 @@ export default function Login() {
 
       <main style={styles.main}>
         <div style={styles.formContainer}>
-          <h1 style={styles.heading}>Log in to your account</h1>
+          <h1 style={styles.heading}>Create a new account</h1>
+
+          {error && <p style={styles.errorMessage}>{error}</p>}
 
           <form onSubmit={handleSubmit} style={styles.form}>
             <div>
@@ -169,7 +185,22 @@ export default function Login() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 style={styles.input}
-                placeholder="Your password"
+                placeholder="Create a password"
+                required
+              />
+            </div>
+
+            <div>
+              <label htmlFor="confirmPassword" style={styles.label}>
+                Confirm Password
+              </label>
+              <input
+                id="confirmPassword"
+                type="password"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                style={styles.input}
+                placeholder="Confirm your password"
                 required
               />
             </div>
@@ -178,14 +209,14 @@ export default function Login() {
               type="submit"
               style={{...styles.button, ...styles.buttonHover}}
             >
-              Log In
+              Sign Up
             </button>
           </form>
 
           <div style={styles.toggleText}>
-            <span>Don't have an account? </span>
-            <Link href="/signup" passHref>
-              <span style={styles.link}>Sign up</span>
+            <span>Already have an account? </span>
+            <Link href="/login" passHref>
+              <span style={styles.link}>Log in</span>
             </Link>
           </div>
         </div>
