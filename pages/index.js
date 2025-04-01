@@ -46,305 +46,352 @@ export default function Home() {
     alert("Copied to clipboard!");
   };
 
-  // Inline styles as a fallback for Tailwind
-  const styles = {
-    container: {
+  // Media query detection for responsive fallback
+  const isMobile = typeof window !== 'undefined' ? window.innerWidth < 768 : false;
+
+  return (
+    <div style={{
       minHeight: "100vh",
       backgroundColor: "#121212",
       color: "#F5F5F5",
-    },
-    header: {
-      padding: "1rem",
-    },
-    headerContainer: {
-      display: "flex",
-      justifyContent: "space-between",
-      alignItems: "center",
-      maxWidth: "1200px",
-      margin: "0 auto",
-      padding: "0 1rem",
-    },
-    logo: {
-      display: "flex",
-      alignItems: "center",
-    },
-    logoSymbol: {
-      color: "#7D3C98",
-      fontSize: "1.875rem",
-      marginRight: "0.5rem",
-    },
-    logoText: {
-      color: "white",
-      fontSize: "1.5rem",
-      fontWeight: "bold",
-    },
-    nav: {
-      display: "flex",
-    },
-    navItem: {
-      marginLeft: "1.5rem",
-      cursor: "pointer",
-      transition: "color 0.2s",
-    },
-    main: {
-      maxWidth: "1200px",
-      margin: "0 auto",
-      padding: "0 1rem",
-    },
-    hero: {
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-      justifyContent: "center",
-      padding: "5rem 0",
-      textAlign: "center",
-    },
-    heading: {
-      fontSize: "3rem",
-      fontWeight: "bold",
-      marginBottom: "1.5rem",
-    },
-    subheading: {
-      fontSize: "1.25rem",
-      marginBottom: "3rem",
-      maxWidth: "36rem",
-    },
-    highlight: {
-      color: "#7D3C98",
-    },
-    form: {
-      display: "flex",
-      flexDirection: "column",
-      width: "100%",
-      maxWidth: "36rem",
-      marginBottom: "2rem",
-    },
-    inputContainer: {
-      display: "flex",
-      flexDirection: "column",
-      marginBottom: "0.5rem",
-    },
-    input: {
-      padding: "1rem",
-      borderRadius: "0.75rem",
-      backgroundColor: "#1E1E50",
-      border: "1px solid #7D3C98",
-      color: "white",
-      marginBottom: "1rem",
-      width: "100%",
-    },
-    button: {
-      backgroundColor: "#7D3C98",
-      color: "white",
-      fontWeight: "bold",
-      padding: "1rem 2rem",
-      borderRadius: "0.75rem",
-      border: "none",
-      cursor: "pointer",
-      transition: "background-color 0.2s",
-    },
-    buttonHover: {
-      backgroundColor: "#6A0DAD",
-    },
-    errorMessage: {
-      color: "#ff4444",
-      marginBottom: "1rem",
-    },
-    resultContainer: {
-      backgroundColor: "#1E1E50",
-      padding: "1.5rem",
-      borderRadius: "0.75rem",
-      marginBottom: "3rem",
-      width: "100%",
-      maxWidth: "36rem",
-    },
-    resultLabel: {
-      marginBottom: "0.5rem",
-      color: "#00D4FF",
-      fontWeight: "500",
-    },
-    resultDisplay: {
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "stretch",
-      gap: "1rem",
-    },
-    resultInput: {
-      flexGrow: "1",
-      padding: "0.75rem",
-      borderRadius: "0.5rem",
-      backgroundColor: "#121212",
-      border: "1px solid #7D3C98",
-      color: "white",
-    },
-    copyButton: {
-      backgroundColor: "#32CD32",
-      color: "white",
-      fontWeight: "bold",
-      padding: "0.75rem 1.5rem",
-      borderRadius: "0.5rem",
-      border: "none",
-      cursor: "pointer",
-      transition: "background-color 0.2s",
-    },
-    features: {
-      display: "grid",
-      gridTemplateColumns: "repeat(1, 1fr)",
-      gap: "2rem",
-      marginBottom: "5rem",
-    },
-    featureCard: {
-      backgroundColor: "rgba(30, 30, 80, 0.3)",
-      padding: "2rem",
-      borderRadius: "0.75rem",
-      textAlign: "center",
-    },
-    featureIcon: {
-      backgroundColor: "#1E1E50",
-      display: "inline-block",
-      padding: "1rem",
-      borderRadius: "0.75rem",
-      marginBottom: "1rem",
-    },
-    featureTitle: {
-      fontSize: "1.5rem",
-      fontWeight: "bold",
-      marginBottom: "0.75rem",
-    },
-    footer: {
-      backgroundColor: "#1E1E50",
-      padding: "2rem 0",
-    },
-    footerContainer: {
-      maxWidth: "1200px",
-      margin: "0 auto",
-      padding: "0 1rem",
-      textAlign: "center",
-    },
-  };
-
-  // Media query for larger screens
-  const isDesktop = typeof window !== 'undefined' && window.innerWidth >= 768;
-
-  if (isDesktop) {
-    styles.features.gridTemplateColumns = "repeat(3, 1fr)";
-    styles.form.flexDirection = "row";
-    styles.form.gap = "1rem";
-    styles.inputContainer.flexGrow = "1";
-    styles.input.marginBottom = "0";
-    styles.resultDisplay.flexDirection = "row";
-  }
-
-  return (
-    <div style={styles.container}>
+      fontFamily: "-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif",
+    }}>
       <Head>
         <title>Cliply - Shorten URLs Instantly</title>
         <meta name="description" content="Fast, branded, and trackable links" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <header style={styles.header}>
-        <div style={styles.headerContainer}>
-          <div style={styles.logo}>
-            <span style={styles.logoSymbol}>@</span>
-            <span style={styles.logoText}>Cliply</span>
-          </div>
-          <nav style={styles.nav}>
-            <Link href="/signup" passHref>
-              <div style={styles.navItem}>Sign up</div>
-            </Link>
-            <Link href="/login" passHref>
-              <div style={styles.navItem}>Log in</div>
-            </Link>
-          </nav>
+      {/* Header */}
+      <header style={{
+        padding: "1.5rem 2rem",
+        maxWidth: "1200px",
+        margin: "0 auto",
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+      }} className="header-container">
+        <div style={{
+          display: "flex",
+          alignItems: "center",
+        }}>
+          <span style={{
+            color: "#7D3C98",
+            fontSize: "2rem",
+            marginRight: "0.5rem",
+            fontWeight: "bold",
+          }}>@</span>
+          <span style={{
+            color: "white",
+            fontSize: "2rem",
+            fontWeight: "bold",
+          }}>Cliply</span>
         </div>
+        <nav className="nav-container">
+          <ul style={{
+            display: "flex",
+            gap: "2rem",
+            listStyle: "none",
+            margin: 0,
+            padding: 0,
+          }}>
+            <li>
+              <Link href="/signup" style={{
+                color: "white",
+                textDecoration: "none",
+                fontSize: "1rem",
+              }}>
+                Sign up
+              </Link>
+            </li>
+            <li>
+              <Link href="/login" style={{
+                color: "white",
+                textDecoration: "none",
+                fontSize: "1rem",
+              }}>
+                Log in
+              </Link>
+            </li>
+          </ul>
+        </nav>
       </header>
 
-      <main style={styles.main}>
-        <section style={styles.hero}>
-          <h1 style={styles.heading}>
-            Shorten URLs with <span style={styles.highlight}>Cliply</span>
+      <main style={{
+        maxWidth: "1200px",
+        margin: "0 auto",
+        padding: "3rem 2rem",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+      }}>
+        {/* Hero Section */}
+        <div style={{
+          textAlign: "center",
+          marginBottom: "4rem",
+          maxWidth: "800px",
+        }}>
+          <h1 style={{
+            fontSize: "3.5rem",
+            fontWeight: "bold",
+            marginBottom: "1rem",
+          }} className="hero-title">
+            Shorten URLs with{" "}
+            <span style={{ color: "#7D3C98" }}>Cliply</span>
           </h1>
-          <p style={styles.subheading}>
+          <p style={{
+            fontSize: "1.25rem",
+            marginBottom: "3rem",
+            opacity: 0.9,
+          }}>
             Simplify your links, track analytics, and optimize sharing.
           </p>
 
-          <form onSubmit={shortenUrl} style={styles.form}>
-            <div style={styles.inputContainer}>
+          {/* URL Input Form */}
+          <form onSubmit={shortenUrl} style={{
+            display: "flex",
+            maxWidth: "100%",
+            margin: "0 auto",
+            marginBottom: "1.5rem",
+          }} className="url-form">
+            <div style={{
+              position: "relative",
+              flexGrow: 1,
+              display: "flex",
+            }}>
               <input
                 type="text"
                 value={url}
                 onChange={(e) => setUrl(e.target.value)}
                 placeholder="Enter a long URL"
-                style={styles.input}
+                style={{
+                  width: "100%",
+                  padding: "1rem 1.5rem",
+                  borderRadius: "0.75rem 0 0 0.75rem",
+                  className: "url-input",
+                  backgroundColor: "#1E1E50",
+                  border: "2px solid #1E1E50",
+                  color: "white",
+                  fontSize: "1rem",
+                  outline: "none",
+                }}
               />
             </div>
             <button
               type="submit"
               disabled={isLoading}
               style={{
-                ...styles.button,
-                ...(isLoading ? {} : styles.buttonHover),
+                backgroundColor: "#7D3C98",
+                color: "white",
+                fontWeight: "bold",
+                padding: "1rem 2rem",
+                border: "none",
+                borderRadius: "0 0.75rem 0.75rem 0",
+                fontSize: "1rem",
+                cursor: "pointer",
+                minWidth: "140px",
+                className: "url-button",
               }}
             >
               {isLoading ? "Shortening..." : "Shorten"}
             </button>
           </form>
 
-          {error && <p style={styles.errorMessage}>{error}</p>}
+          {error && (
+            <p style={{ color: "#ff4d4d", marginBottom: "1rem" }}>{error}</p>
+          )}
 
           {shortUrl && (
-            <div style={styles.resultContainer}>
-              <p style={styles.resultLabel}>Your shortened URL:</p>
-              <div style={styles.resultDisplay}>
+            <div style={{
+              backgroundColor: "#1E1E50",
+              borderRadius: "0.75rem",
+              padding: "1.5rem",
+              marginTop: "1.5rem",
+              textAlign: "left",
+            }}>
+              <p style={{ 
+                marginBottom: "0.75rem", 
+                color: "#00D4FF", 
+                fontWeight: "500" 
+              }}>
+                Your shortened URL:
+              </p>
+              <div style={{
+                display: "flex",
+                gap: "0.75rem",
+              }} className="result-container">
                 <input
                   type="text"
                   value={shortUrl}
                   readOnly
-                  style={styles.resultInput}
+                  style={{
+                    flexGrow: 1,
+                    padding: "0.75rem",
+                    backgroundColor: "#121212",
+                    border: "1px solid #7D3C98",
+                    color: "white",
+                    borderRadius: "0.5rem",
+                  }}
                 />
                 <button
                   onClick={copyToClipboard}
-                  style={styles.copyButton}
+                  style={{
+                    backgroundColor: "#32CD32",
+                    color: "white",
+                    border: "none",
+                    borderRadius: "0.5rem",
+                    padding: "0 1.5rem",
+                    cursor: "pointer",
+                    fontWeight: "bold",
+                    className: "copy-button",
+                  }}
                 >
                   Copy
                 </button>
               </div>
             </div>
           )}
-        </section>
+        </div>
 
-        <section style={styles.features}>
-          <div style={styles.featureCard}>
-            <div style={styles.featureIcon}>
-              <span style={{ color: "#7D3C98", fontSize: "1.5rem" }}>🔗</span>
+        {/* Features Section */}
+        <div style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(3, 1fr)",
+          gap: "2rem",
+          width: "100%",
+          marginTop: "2rem",
+        }} className="feature-grid">
+          {/* Feature 1 */}
+          <div style={{
+            backgroundColor: "#1E1E50",
+            borderRadius: "1rem",
+            padding: "2rem",
+            textAlign: "center",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}>
+            <div style={{
+              backgroundColor: "#121212",
+              borderRadius: "0.75rem",
+              width: "60px",
+              height: "60px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              marginBottom: "1.5rem",
+            }}>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M10 13C11.1046 13 12 12.1046 12 11C12 9.89543 11.1046 9 10 9C8.89543 9 8 9.89543 8 11C8 12.1046 8.89543 13 10 13Z" stroke="#7D3C98" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M18 19C19.1046 19 20 18.1046 20 17C20 15.8954 19.1046 15 18 15C16.8954 15 16 15.8954 16 17C16 18.1046 16.8954 19 18 19Z" stroke="#7D3C98" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M12 11L16 17" stroke="#7D3C98" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M8 5H16L14 9H10L8 5Z" stroke="#7D3C98" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
             </div>
-            <h2 style={styles.featureTitle}>Branded Links</h2>
-            <p>Create custom short links with your own domain.</p>
+            <h2 style={{
+              fontSize: "1.5rem",
+              fontWeight: "bold",
+              marginBottom: "0.75rem",
+            }}>
+              Branded Links
+            </h2>
+            <p style={{
+              color: "#F5F5F5",
+              opacity: 0.8,
+            }}>
+              Create custom short links with your own domain.
+            </p>
           </div>
 
-          <div style={styles.featureCard}>
-            <div style={styles.featureIcon}>
-              <span style={{ color: "#00D4FF", fontSize: "1.5rem" }}>📊</span>
+          {/* Feature 2 */}
+          <div style={{
+            backgroundColor: "#1E1E50",
+            borderRadius: "1rem",
+            padding: "2rem",
+            textAlign: "center",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}>
+            <div style={{
+              backgroundColor: "#121212",
+              borderRadius: "0.75rem",
+              width: "60px",
+              height: "60px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              marginBottom: "1.5rem",
+            }}>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M18 20V10" stroke="#00D4FF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M12 20V4" stroke="#00D4FF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M6 20V14" stroke="#00D4FF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
             </div>
-            <h2 style={styles.featureTitle}>Analytics</h2>
-            <p>Gain insights with detailed click tracking.</p>
+            <h2 style={{
+              fontSize: "1.5rem",
+              fontWeight: "bold",
+              marginBottom: "0.75rem",
+            }}>
+              Analytics
+            </h2>
+            <p style={{
+              color: "#F5F5F5",
+              opacity: 0.8,
+            }}>
+              Gain insights with detailed click tracking.
+            </p>
           </div>
 
-          <div style={styles.featureCard}>
-            <div style={styles.featureIcon}>
-              <span style={{ color: "#00D4FF", fontSize: "1.5rem" }}>⚡</span>
+          {/* Feature 3 */}
+          <div style={{
+            backgroundColor: "#1E1E50",
+            borderRadius: "1rem",
+            padding: "2rem",
+            textAlign: "center",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}>
+            <div style={{
+              backgroundColor: "#121212",
+              borderRadius: "0.75rem",
+              width: "60px",
+              height: "60px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              marginBottom: "1.5rem",
+            }}>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" stroke="#00D4FF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
             </div>
-            <h2 style={styles.featureTitle}>Fast Redirection</h2>
-            <p>Direct users to their destinations instantly.</p>
+            <h2 style={{
+              fontSize: "1.5rem",
+              fontWeight: "bold",
+              marginBottom: "0.75rem",
+            }}>
+              Fast Redirection
+            </h2>
+            <p style={{
+              color: "#F5F5F5",
+              opacity: 0.8,
+            }}>
+              Direct users to their destinations instantly.
+            </p>
           </div>
-        </section>
+        </div>
       </main>
 
-      <footer style={styles.footer}>
-        <div style={styles.footerContainer}>
-          <p>© 2025 Cliply. All rights reserved.</p>
-        </div>
+      <footer style={{
+        backgroundColor: "#1E1E50",
+        padding: "2rem 0",
+        textAlign: "center",
+        marginTop: "4rem",
+      }}>
+        <p>© 2025 Cliply. All rights reserved.</p>
       </footer>
     </div>
   );
